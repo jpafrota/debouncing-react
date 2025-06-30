@@ -6,9 +6,9 @@ function App() {
   const [repoName, setRepoName] = useState("");
   const [username, setUsername] = useState("");
   const [touched, setTouched] = useState(false);
-  const [message, setMessage] = useState("Type something!");
+  const [feedback, setFeedback] = useState("Type something!");
 
-  const debouncedSetMessage = useMemo(
+  const debouncedSetFeedback = useMemo(
     () =>
       debounce(async (username: string, repoName: string) => {
         repoName = repoName.trim();
@@ -17,17 +17,17 @@ function App() {
           const res = await fetch(
             `https://api.github.com/repos/${username}/${repoName}`
           );
-          if (res.status === 404) setMessage("Repository available!");
-          else if (res.status === 200) setMessage("Repository already exists");
+          if (res.status === 404) setFeedback("Repository available!");
+          else if (res.status === 200) setFeedback("Repository already exists");
         } catch {
-          setMessage("Failed to fetch");
+          setFeedback("Failed to fetch");
         }
       }, 500),
     []
   );
 
   const type =
-    touched && message === "Repository available!"
+    touched && feedback === "Repository available!"
       ? "success"
       : touched && !repoName
       ? "error"
@@ -42,15 +42,15 @@ function App() {
     }
 
     if (!repoName) {
-      setMessage("⚠ Name cannot be blank");
+      setFeedback("⚠ Name cannot be blank");
       return;
     }
 
-    setMessage("Checking availability...");
-    debouncedSetMessage(username, repoName);
+    setFeedback("Checking availability...");
+    debouncedSetFeedback(username, repoName);
 
-    return () => debouncedSetMessage.cancel();
-  }, [repoName, username, touched, debouncedSetMessage]);
+    return () => debouncedSetFeedback.cancel();
+  }, [repoName, username, touched, debouncedSetFeedback]);
 
   return (
     <div>
@@ -76,7 +76,7 @@ function App() {
                 setRepoName(e.target.value);
               }}
             />
-            <span className={type}>{message}</span>
+            <span className={type}>{feedback}</span>
           </label>
         )}
       </form>
