@@ -1,0 +1,60 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+* {
+  font-family: sans-serif;
+  background-color: #0d1117;
+  color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+label {
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.success {
+  color: lightgreen;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+input {
+  height: 30px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 0px 8px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: 1px solid #206feb;
+  border: 1px solid #206feb;
+}
